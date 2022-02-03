@@ -116,7 +116,7 @@ namespace Nitro_Checker_V2
 
                 var respionse = httpRequest.Get(url);
 
-                if (respionse.StatusCode==Leaf.xNet.HttpStatusCode.OK || respionse.ToString().Contains("nitro") )
+                if (respionse.StatusCode == Leaf.xNet.HttpStatusCode.OK && respionse.ToString().Contains("name"))
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("[+] Valid: " + code);
@@ -147,21 +147,6 @@ namespace Nitro_Checker_V2
                     check(code);
                     ratelimit += 1;
                 }
-
-                if (ex.Message.Contains("200"))
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("[+] Valid: " + code);
-                    writeFile(code);
-                    if (webhookURL != String.Empty)
-                    {
-                        sendWebhookMSG(webhookURL, "DISCORD NITRO CHECKER", "Got a valid discord nitro hit: discord.gift/" + code);
-                    }
-                    hits += 1;
-                    cheked += 1;
-                }
-
-
                 if (ex.Status.Equals(HttpExceptionStatus.ConnectFailure))
                 {
                     proxyError += 1;
@@ -267,7 +252,6 @@ namespace Nitro_Checker_V2
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show(sfd.FileName);
                     var file = File.Create(sfd.FileName);
                     StreamWriter streamWriter = new StreamWriter(file);
                     streamWriter.AutoFlush = true;
