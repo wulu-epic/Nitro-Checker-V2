@@ -164,7 +164,10 @@ namespace Nitro_Checker_V2
         public static void seperateThread()
         {
             parallelLoopResult = Parallel.ForEach(codes, code => {
-                new ParallelOptions { MaxDegreeOfParallelism = threads };
+                new ParallelOptions {
+                    MaxDegreeOfParallelism = threads 
+                    
+                };
                 check(code);
                 Console.Title = $"Discord Nitro Checker & Generator by wulu#0827 | Hits: {hits} | Invalid: {invalid} | Proxy Error: {proxyError} | Rate limited: {ratelimit} | Remaining: {comboAmount - cheked} ";
             });
@@ -341,6 +344,7 @@ namespace Nitro_Checker_V2
 
             Console.Clear();
             Thread thread = new Thread(seperateThread);
+            thread.IsBackground = true;
             Console.ForegroundColor = ConsoleColor.Magenta;
 
             Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", wulu));
