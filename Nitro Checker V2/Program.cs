@@ -116,7 +116,7 @@ namespace Nitro_Checker_V2
 
                 var respionse = httpRequest.Get(url);
 
-                if (respionse.StatusCode == Leaf.xNet.HttpStatusCode.OK && respionse.ToString().Contains("name"))
+                if (respionse.ToString().Contains("redeemed"))
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("[+] Valid: " + code);
